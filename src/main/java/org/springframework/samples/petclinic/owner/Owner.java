@@ -45,6 +45,8 @@ import org.springframework.samples.petclinic.model.Person;
 @Entity
 @Table(name = "owners")
 public class Owner extends Person {
+	@Column(name = "active")
+	private boolean active;
 
 	@Column(name = "address")
 	@NotEmpty
@@ -61,6 +63,16 @@ public class Owner extends Person {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<Pet> pets;
+
+
+	public boolean isActive() {
+		// TODO Auto-generated method stub
+		return this.active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
 	public String getAddress() {
 		return this.address;
@@ -141,10 +153,9 @@ public class Owner extends Person {
 	@Override
 	public String toString() {
 		return new ToStringCreator(this)
-
-				.append("id", this.getId()).append("new", this.isNew()).append("lastName", this.getLastName())
-				.append("firstName", this.getFirstName()).append("address", this.address).append("city", this.city)
-				.append("telephone", this.telephone).toString();
+			.append("active", this.active).append("id", this.getId()).append("new", this.isNew()).append("lastName", this.getLastName())
+			.append("firstName", this.getFirstName()).append("address", this.address).append("city", this.city)
+			.append("telephone", this.telephone).toString();
 	}
 
 }
